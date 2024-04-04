@@ -1,6 +1,8 @@
 # AI-COVER Using RVC V2
-
 - Link: https://github.com/SociallyIneptWeeb/AICoverGen
+
+- Queue System using celery(python) + redis + rabbitMQ
+- Image information: Ubuntu 20.04 + CUDA 11.8 + CUDnn 8. + ONNX runtime + Python 3.9
 
 1. Clone & download model
 ```# command
