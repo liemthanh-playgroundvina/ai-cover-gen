@@ -1,5 +1,7 @@
 # AI-COVER Using RVC V2
 
+- Link: https://github.com/SociallyIneptWeeb/AICoverGen
+
 1. Clone & download model
 ```# command
 git clone https://github.com/liemthanh-playgroundvina/ai-cover
