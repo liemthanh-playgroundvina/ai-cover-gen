@@ -1,0 +1,53 @@
+version: '3.7'
+
+services:
+  worker-ai-cover-gen:
+    image: ai-cover-gen
+    container_name: worker-ai-cover-gen
+    volumes:
+      - ./src:/app/src
+      - ./mdxnet_models:/app/mdxnet_models
+      - ./rvc_models:/app/rvc_models
+      - ./song_output:/app/song_output
+    command: bash -c "celery -A ai_celery.router worker -Q ai_cover_gen --loglevel=info --pool=gevent --concurrency=1 -E --logfile=logs/celery.log && tail -f /dev/null" &
+#    restart: always
+    networks:
+      - aiservice-net-dev-v2
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+      # limits:
+      #   cpus: '0.50'
+      #   memory: 2G
+
+  #  # App
+  #  app:
+  #    image: ai-cover-gen
+  #    container_name: app-ai-cover-gen
+  #    command: uvicorn api:app --host 0.0.0.0 --port 8008 --reload
+  #    volumes:
+  #      - ./src:/app/src
+  #      - ./mdxnet_models:/app/mdxnet_models
+  #      - ./rvc_models:/app/rvc_models
+  #      - ./song_output:/app/song_output
+  #    ports:
+  #      - "8008:8008"
+  #    restart: always
+  #
+  #    deploy:
+  #      resources:
+  #        reservations:
+  #          devices:
+  #            - driver: nvidia
+  #              count: 1
+  #              capabilities: [ gpu ]
+  ##    networks:
+  ##      - aiservice-net-dev-v2
+
+networks:
+  aiservice-net-dev-v2:
+    external: true

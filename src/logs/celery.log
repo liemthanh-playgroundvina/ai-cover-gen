@@ -1,0 +1,220 @@
+[2024-04-04 08:37:00,643: WARNING/MainProcess] Substantial drift from celery@7d92f5f3c54f may mean clocks are out of sync.  Current drift is 148 seconds.  [orig: 2024-04-04 08:37:00.643449 recv: 2024-04-04 08:34:32.501496]
+[2024-04-04 08:37:00,650: WARNING/MainProcess] Substantial drift from celery@ai_lip_sync may mean clocks are out of sync.  Current drift is 148 seconds.  [orig: 2024-04-04 08:37:00.650948 recv: 2024-04-04 08:34:32.500441]
+[2024-04-04 08:44:22,319: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:44:22,322: INFO/MainProcess] Connected to amqp://guest:**@rabbitmq-dev-v2:5672//
+[2024-04-04 08:44:22,323: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:44:22,324: INFO/MainProcess] mingle: searching for neighbors
+[2024-04-04 08:44:23,346: INFO/MainProcess] mingle: sync with 3 nodes
+[2024-04-04 08:44:23,346: INFO/MainProcess] mingle: sync complete
+[2024-04-04 08:44:23,352: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:44:23,353: INFO/MainProcess] celery@a7ff6b403d4e ready.
+[2024-04-04 08:44:23,354: INFO/MainProcess] pidbox: Connected to amqp://guest:**@rabbitmq-dev-v2:5672//.
+[2024-04-04 08:46:16,914: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:46:16,917: INFO/MainProcess] Connected to amqp://guest:**@rabbitmq-dev-v2:5672//
+[2024-04-04 08:46:16,917: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:46:16,919: INFO/MainProcess] mingle: searching for neighbors
+[2024-04-04 08:46:17,928: INFO/MainProcess] mingle: sync with 3 nodes
+[2024-04-04 08:46:17,929: INFO/MainProcess] mingle: sync complete
+[2024-04-04 08:46:17,933: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:46:17,937: INFO/MainProcess] pidbox: Connected to amqp://guest:**@rabbitmq-dev-v2:5672//.
+[2024-04-04 08:46:17,940: INFO/MainProcess] celery@44558af4d9e4 ready.
+[2024-04-04 08:48:07,946: INFO/MainProcess] missed heartbeat from celery@ai_lip_sync
+[2024-04-04 08:49:06,086: WARNING/MainProcess] Got shutdown from remote
+[2024-04-04 08:49:06,143: WARNING/MainProcess] Got shutdown from remote
+[2024-04-04 08:50:20,899: WARNING/MainProcess] Got shutdown from remote
+[2024-04-04 08:54:15,944: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:54:15,946: INFO/MainProcess] Connected to amqp://guest:**@rabbitmq-dev-v2:5672//
+[2024-04-04 08:54:15,947: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:54:15,948: INFO/MainProcess] mingle: searching for neighbors
+[2024-04-04 08:54:17,058: INFO/MainProcess] mingle: sync with 1 nodes
+[2024-04-04 08:54:17,058: INFO/MainProcess] mingle: sync complete
+[2024-04-04 08:54:17,061: WARNING/MainProcess] /usr/local/lib/python3.9/site-packages/celery/worker/consumer/consumer.py:498: CPendingDeprecationWarning: The broker_connection_retry configuration setting will no longer determine
+whether broker connection retries are made during startup in Celery 6.0 and above.
+If you wish to retain the existing behavior for retrying connections on startup,
+you should set broker_connection_retry_on_startup to True.
+  warnings.warn(
+
+[2024-04-04 08:54:17,063: INFO/MainProcess] pidbox: Connected to amqp://guest:**@rabbitmq-dev-v2:5672//.
+[2024-04-04 08:54:17,065: INFO/MainProcess] celery@326d1f471bc3 ready.
+[2024-04-04 08:54:49,196: INFO/MainProcess] Task ai_celery.ai_cover_gen[b8104309-a097-4ed4-b241-bde1976f3e31] received
+[2024-04-04 08:54:49,197: WARNING/MainProcess] ============= AI Cover Gen task: Started ===================
+[2024-04-04 08:54:49,197: WARNING/MainProcess] [~] Starting AI Cover Generation Pipeline...
+[2024-04-04 08:54:49,206: WARNING/MainProcess] [~] Downloading song...
+[2024-04-04 08:54:52,884: WARNING/MainProcess] [download]   0.0% of    5.29MiB at  Unknown B/s ETA Unknown
+[2024-04-04 08:54:52,886: WARNING/MainProcess] [download]   0.1% of    5.29MiB at    1.18MiB/s ETA 00:04  
+[2024-04-04 08:54:52,887: WARNING/MainProcess] [download]   0.1% of    5.29MiB at    1.77MiB/s ETA 00:02
+[2024-04-04 08:54:52,888: WARNING/MainProcess] [download]   0.3% of    5.29MiB at    3.00MiB/s ETA 00:01
+[2024-04-04 08:54:52,888: WARNING/MainProcess] [download]   0.6% of    5.29MiB at    5.90MiB/s ETA 00:00
+[2024-04-04 08:54:52,888: WARNING/MainProcess] [download]   1.2% of    5.29MiB at   11.21MiB/s ETA 00:00
+[2024-04-04 08:54:52,892: WARNING/MainProcess] [download]   2.3% of    5.29MiB at   13.92MiB/s ETA 00:00
+[2024-04-04 08:54:52,897: WARNING/MainProcess] [download]   4.7% of    5.29MiB at   17.73MiB/s ETA 00:00
+[2024-04-04 08:54:52,903: WARNING/MainProcess] [download]   9.4% of    5.29MiB at   24.93MiB/s ETA 00:00
+[2024-04-04 08:54:52,913: WARNING/MainProcess] [download]  18.9% of    5.29MiB at   33.20MiB/s ETA 00:00
+[2024-04-04 08:54:52,927: WARNING/MainProcess] [download]  37.8% of    5.29MiB at   45.10MiB/s ETA 00:00
+[2024-04-04 08:54:53,029: WARNING/MainProcess] [download]  75.7% of    5.29MiB at   27.44MiB/s ETA 00:00
+[2024-04-04 08:54:53,107: WARNING/MainProcess] [download] 100.0% of    5.29MiB at   23.58MiB/s ETA 00:00
+[2024-04-04 08:54:53,118: WARNING/MainProcess] [download] 100% of    5.29MiB in 00:00:00 at 12.19MiB/s  
+[2024-04-04 08:54:53,120: WARNING/MainProcess]                                                        
+[2024-04-04 08:55:07,162: WARNING/MainProcess] [~] Separating Vocals from Instrumental...
+[2024-04-04 08:55:22,319: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:55:23,536: WARNING/MainProcess]   2%|1         | 1/56 [00:01<01:06,  1.22s/it]
+[2024-04-04 08:55:23,953: WARNING/MainProcess]   4%|3         | 2/56 [00:01<00:40,  1.34it/s]
+[2024-04-04 08:55:24,091: WARNING/MainProcess]   9%|8         | 5/56 [00:01<00:12,  4.08it/s]
+[2024-04-04 08:55:24,224: WARNING/MainProcess]  14%|#4        | 8/56 [00:01<00:06,  6.97it/s]
+[2024-04-04 08:55:24,353: WARNING/MainProcess]  20%|#9        | 11/56 [00:02<00:04,  9.86it/s]
+[2024-04-04 08:55:24,483: WARNING/MainProcess]  25%|##5       | 14/56 [00:02<00:03, 12.57it/s]
+[2024-04-04 08:55:24,615: WARNING/MainProcess]  30%|###       | 17/56 [00:02<00:02, 14.88it/s]
+[2024-04-04 08:55:24,745: WARNING/MainProcess]  36%|###5      | 20/56 [00:02<00:02, 16.88it/s]
+[2024-04-04 08:55:24,875: WARNING/MainProcess]  41%|####1     | 23/56 [00:02<00:01, 18.48it/s]
+[2024-04-04 08:55:25,005: WARNING/MainProcess]  46%|####6     | 26/56 [00:02<00:01, 19.72it/s]
+[2024-04-04 08:55:26,237: WARNING/MainProcess]  52%|#####1    | 29/56 [00:03<00:04,  6.15it/s]
+[2024-04-04 08:55:26,373: WARNING/MainProcess]  57%|#####7    | 32/56 [00:04<00:03,  7.91it/s]
+[2024-04-04 08:55:26,507: WARNING/MainProcess]  62%|######2   | 35/56 [00:04<00:02,  9.85it/s]
+[2024-04-04 08:55:26,638: WARNING/MainProcess]  68%|######7   | 38/56 [00:04<00:01, 11.90it/s]
+[2024-04-04 08:55:26,772: WARNING/MainProcess]  73%|#######3  | 41/56 [00:04<00:01, 13.88it/s]
+[2024-04-04 08:55:26,901: WARNING/MainProcess]  79%|#######8  | 44/56 [00:04<00:00, 15.80it/s]
+[2024-04-04 08:55:27,031: WARNING/MainProcess]  84%|########3 | 47/56 [00:04<00:00, 17.45it/s]
+[2024-04-04 08:55:27,162: WARNING/MainProcess]  89%|########9 | 50/56 [00:04<00:00, 18.81it/s]
+[2024-04-04 08:55:27,300: WARNING/MainProcess]  95%|#########4| 53/56 [00:04<00:00, 19.61it/s]
+[2024-04-04 08:55:27,429: WARNING/MainProcess] 100%|##########| 56/56 [00:05<00:00, 20.56it/s]
+[2024-04-04 08:55:27,483: WARNING/MainProcess] 100%|##########| 56/56 [00:05<00:00, 10.84it/s]
+[2024-04-04 08:55:27,515: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:55:28,618: WARNING/MainProcess]   2%|1         | 1/56 [00:01<01:00,  1.10s/it]
+[2024-04-04 08:55:28,747: WARNING/MainProcess]   7%|7         | 4/56 [00:01<00:12,  4.11it/s]
+[2024-04-04 08:55:28,879: WARNING/MainProcess]  12%|#2        | 7/56 [00:01<00:06,  7.33it/s]
+[2024-04-04 08:55:29,012: WARNING/MainProcess]  18%|#7        | 10/56 [00:01<00:04, 10.37it/s]
+[2024-04-04 08:55:29,142: WARNING/MainProcess]  23%|##3       | 13/56 [00:01<00:03, 13.14it/s]
+[2024-04-04 08:55:29,271: WARNING/MainProcess]  29%|##8       | 16/56 [00:01<00:02, 15.51it/s]
+[2024-04-04 08:55:29,404: WARNING/MainProcess]  34%|###3      | 19/56 [00:01<00:02, 17.33it/s]
+[2024-04-04 08:55:29,535: WARNING/MainProcess]  39%|###9      | 22/56 [00:02<00:01, 18.84it/s]
+[2024-04-04 08:55:29,664: WARNING/MainProcess]  45%|####4     | 25/56 [00:02<00:01, 20.02it/s]
+[2024-04-04 08:55:29,794: WARNING/MainProcess]  50%|#####     | 28/56 [00:02<00:01, 20.87it/s]
+[2024-04-04 08:55:31,031: WARNING/MainProcess]  55%|#####5    | 31/56 [00:03<00:04,  6.25it/s]
+[2024-04-04 08:55:31,163: WARNING/MainProcess]  61%|######    | 34/56 [00:03<00:02,  8.02it/s]
+[2024-04-04 08:55:31,293: WARNING/MainProcess]  66%|######6   | 37/56 [00:03<00:01, 10.00it/s]
+[2024-04-04 08:55:31,426: WARNING/MainProcess]  71%|#######1  | 40/56 [00:03<00:01, 12.03it/s]
+[2024-04-04 08:55:31,556: WARNING/MainProcess]  77%|#######6  | 43/56 [00:04<00:00, 14.06it/s]
+[2024-04-04 08:55:31,688: WARNING/MainProcess]  82%|########2 | 46/56 [00:04<00:00, 15.90it/s]
+[2024-04-04 08:55:31,817: WARNING/MainProcess]  88%|########7 | 49/56 [00:04<00:00, 17.55it/s]
+[2024-04-04 08:55:31,948: WARNING/MainProcess]  93%|#########2| 52/56 [00:04<00:00, 18.91it/s]
+[2024-04-04 08:55:32,079: WARNING/MainProcess]  98%|#########8| 55/56 [00:04<00:00, 19.95it/s]
+[2024-04-04 08:55:32,177: WARNING/MainProcess] 100%|##########| 56/56 [00:04<00:00, 12.01it/s]
+[2024-04-04 08:55:33,148: WARNING/MainProcess] [~] Separating Main Vocals from Backup Vocals...
+[2024-04-04 08:55:38,228: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:55:39,305: WARNING/MainProcess]   2%|1         | 1/56 [00:01<00:59,  1.08s/it]
+[2024-04-04 08:55:40,910: WARNING/MainProcess]   4%|3         | 2/56 [00:02<01:14,  1.39s/it]
+[2024-04-04 08:55:41,031: WARNING/MainProcess]  11%|#         | 6/56 [00:02<00:17,  2.93it/s]
+[2024-04-04 08:55:41,147: WARNING/MainProcess]  18%|#7        | 10/56 [00:02<00:08,  5.63it/s]
+[2024-04-04 08:55:41,262: WARNING/MainProcess]  25%|##5       | 14/56 [00:03<00:04,  8.78it/s]
+[2024-04-04 08:55:41,380: WARNING/MainProcess]  32%|###2      | 18/56 [00:03<00:03, 12.22it/s]
+[2024-04-04 08:55:41,496: WARNING/MainProcess]  39%|###9      | 22/56 [00:03<00:02, 15.80it/s]
+[2024-04-04 08:55:41,611: WARNING/MainProcess]  46%|####6     | 26/56 [00:03<00:01, 19.33it/s]
+[2024-04-04 08:55:42,800: WARNING/MainProcess]  54%|#####3    | 30/56 [00:04<00:03,  7.63it/s]
+[2024-04-04 08:55:42,914: WARNING/MainProcess]  61%|######    | 34/56 [00:04<00:02, 10.13it/s]
+[2024-04-04 08:55:43,029: WARNING/MainProcess]  68%|######7   | 38/56 [00:04<00:01, 13.00it/s]
+[2024-04-04 08:55:43,143: WARNING/MainProcess]  75%|#######5  | 42/56 [00:04<00:00, 16.12it/s]
+[2024-04-04 08:55:43,259: WARNING/MainProcess]  82%|########2 | 46/56 [00:05<00:00, 19.24it/s]
+[2024-04-04 08:55:43,374: WARNING/MainProcess]  89%|########9 | 50/56 [00:05<00:00, 22.28it/s]
+[2024-04-04 08:55:43,489: WARNING/MainProcess]  96%|#########6| 54/56 [00:05<00:00, 24.99it/s]
+[2024-04-04 08:55:43,585: WARNING/MainProcess] 100%|##########| 56/56 [00:05<00:00, 10.45it/s]
+[2024-04-04 08:55:43,617: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:55:44,694: WARNING/MainProcess]   2%|1         | 1/56 [00:01<00:59,  1.08s/it]
+[2024-04-04 08:55:44,811: WARNING/MainProcess]   9%|8         | 5/56 [00:01<00:09,  5.40it/s]
+[2024-04-04 08:55:44,927: WARNING/MainProcess]  16%|#6        | 9/56 [00:01<00:04, 10.04it/s]
+[2024-04-04 08:55:45,042: WARNING/MainProcess]  23%|##3       | 13/56 [00:01<00:02, 14.63it/s]
+[2024-04-04 08:55:45,156: WARNING/MainProcess]  30%|###       | 17/56 [00:01<00:02, 18.87it/s]
+[2024-04-04 08:55:45,271: WARNING/MainProcess]  38%|###7      | 21/56 [00:01<00:01, 22.53it/s]
+[2024-04-04 08:55:45,385: WARNING/MainProcess]  45%|####4     | 25/56 [00:01<00:01, 25.59it/s]
+[2024-04-04 08:55:46,577: WARNING/MainProcess]  52%|#####1    | 29/56 [00:02<00:03,  8.12it/s]
+[2024-04-04 08:55:46,692: WARNING/MainProcess]  59%|#####8    | 33/56 [00:03<00:02, 10.73it/s]
+[2024-04-04 08:55:46,807: WARNING/MainProcess]  66%|######6   | 37/56 [00:03<00:01, 13.67it/s]
+[2024-04-04 08:55:46,923: WARNING/MainProcess]  73%|#######3  | 41/56 [00:03<00:00, 16.80it/s]
+[2024-04-04 08:55:47,040: WARNING/MainProcess]  80%|########  | 45/56 [00:03<00:00, 19.88it/s]
+[2024-04-04 08:55:47,156: WARNING/MainProcess]  88%|########7 | 49/56 [00:03<00:00, 22.84it/s]
+[2024-04-04 08:55:47,270: WARNING/MainProcess]  95%|#########4| 53/56 [00:03<00:00, 25.52it/s]
+[2024-04-04 08:55:47,396: WARNING/MainProcess] 100%|##########| 56/56 [00:03<00:00, 14.82it/s]
+[2024-04-04 08:55:48,350: WARNING/MainProcess] [~] Applying DeReverb to Vocals...
+[2024-04-04 08:55:54,218: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:55:55,344: WARNING/MainProcess]   4%|3         | 1/28 [00:01<00:30,  1.13s/it]
+[2024-04-04 08:55:55,457: WARNING/MainProcess]   7%|7         | 2/28 [00:01<00:13,  1.89it/s]
+[2024-04-04 08:55:55,634: WARNING/MainProcess]  14%|#4        | 4/28 [00:01<00:06,  3.95it/s]
+[2024-04-04 08:55:55,811: WARNING/MainProcess]  21%|##1       | 6/28 [00:01<00:03,  5.70it/s]
+[2024-04-04 08:55:55,994: WARNING/MainProcess]  29%|##8       | 8/28 [00:01<00:02,  7.06it/s]
+[2024-04-04 08:55:56,172: WARNING/MainProcess]  36%|###5      | 10/28 [00:01<00:02,  8.17it/s]
+[2024-04-04 08:55:56,355: WARNING/MainProcess]  43%|####2     | 12/28 [00:02<00:01,  8.95it/s]
+[2024-04-04 08:55:56,532: WARNING/MainProcess]  50%|#####     | 14/28 [00:02<00:01,  9.60it/s]
+[2024-04-04 08:55:56,642: INFO/MainProcess] missed heartbeat from celery@7d92f5f3c54f
+[2024-04-04 08:55:56,643: WARNING/MainProcess] Substantial drift from celery@7d92f5f3c54f may mean clocks are out of sync.  Current drift is 59 seconds.  [orig: 2024-04-04 08:55:56.643564 recv: 2024-04-04 08:54:57.564923]
+[2024-04-04 08:55:57,807: WARNING/MainProcess]  57%|#####7    | 16/28 [00:03<00:03,  3.64it/s]
+[2024-04-04 08:55:57,985: WARNING/MainProcess]  64%|######4   | 18/28 [00:03<00:02,  4.62it/s]
+[2024-04-04 08:55:58,156: WARNING/MainProcess]  71%|#######1  | 20/28 [00:03<00:01,  5.69it/s]
+[2024-04-04 08:55:58,337: WARNING/MainProcess]  79%|#######8  | 22/28 [00:04<00:00,  6.68it/s]
+[2024-04-04 08:55:58,513: WARNING/MainProcess]  86%|########5 | 24/28 [00:04<00:00,  7.64it/s]
+[2024-04-04 08:55:58,694: WARNING/MainProcess]  93%|#########2| 26/28 [00:04<00:00,  8.42it/s]
+[2024-04-04 08:55:58,870: WARNING/MainProcess] 100%|##########| 28/28 [00:04<00:00,  9.13it/s]
+[2024-04-04 08:55:58,971: WARNING/MainProcess] 100%|##########| 28/28 [00:04<00:00,  5.89it/s]
+[2024-04-04 08:55:59,002: WARNING/MainProcess] 0it [00:00, ?it/s]
+[2024-04-04 08:56:00,131: WARNING/MainProcess]   4%|3         | 1/28 [00:01<00:30,  1.13s/it]
+[2024-04-04 08:56:00,308: WARNING/MainProcess]  11%|#         | 3/28 [00:01<00:08,  2.79it/s]
+[2024-04-04 08:56:00,485: WARNING/MainProcess]  18%|#7        | 5/28 [00:01<00:05,  4.56it/s]
+[2024-04-04 08:56:00,656: WARNING/MainProcess]  25%|##5       | 7/28 [00:01<00:03,  6.14it/s]
+[2024-04-04 08:56:00,832: WARNING/MainProcess]  32%|###2      | 9/28 [00:01<00:02,  7.43it/s]
+[2024-04-04 08:56:01,014: WARNING/MainProcess]  39%|###9      | 11/28 [00:02<00:02,  8.38it/s]
+[2024-04-04 08:56:01,188: WARNING/MainProcess]  46%|####6     | 13/28 [00:02<00:01,  9.21it/s]
+[2024-04-04 08:56:02,468: WARNING/MainProcess]  54%|#####3    | 15/28 [00:03<00:03,  3.57it/s]
+[2024-04-04 08:56:02,640: WARNING/MainProcess]  61%|######    | 17/28 [00:03<00:02,  4.57it/s]
+[2024-04-04 08:56:02,817: WARNING/MainProcess]  68%|######7   | 19/28 [00:03<00:01,  5.61it/s]
+[2024-04-04 08:56:02,989: WARNING/MainProcess]  75%|#######5  | 21/28 [00:03<00:01,  6.67it/s]
+[2024-04-04 08:56:03,165: WARNING/MainProcess]  82%|########2 | 23/28 [00:04<00:00,  7.63it/s]
+[2024-04-04 08:56:03,347: WARNING/MainProcess]  89%|########9 | 25/28 [00:04<00:00,  8.41it/s]
+[2024-04-04 08:56:03,519: WARNING/MainProcess]  96%|#########6| 27/28 [00:04<00:00,  9.18it/s]
+[2024-04-04 08:56:03,705: WARNING/MainProcess] 100%|##########| 28/28 [00:04<00:00,  5.95it/s]
+[2024-04-04 08:56:04,357: WARNING/MainProcess] [~] Converting voice using RVC...
+[2024-04-04 08:56:04,357: WARNING/MainProcess] [Errno 2] No such file or directory: '/app/rvc_models/Naruto'
+[2024-04-04 08:56:04,357: INFO/MainProcess] missed heartbeat from celery@7d92f5f3c54f
+[2024-04-04 08:56:04,370: INFO/MainProcess] Task ai_celery.ai_cover_gen[b8104309-a097-4ed4-b241-bde1976f3e31] succeeded in 75.1735935859997s: None
+[2024-04-04 08:59:47,538: INFO/MainProcess] Task ai_celery.ai_cover_gen[10d308cb-8f57-4c6e-83c2-a364f88ff205] received
+[2024-04-04 08:59:47,541: WARNING/MainProcess] ============= AI Cover Gen task: Started ===================
+[2024-04-04 08:59:47,543: WARNING/MainProcess] [~] Starting AI Cover Generation Pipeline...
+[2024-04-04 08:59:47,545: WARNING/MainProcess] /home/ai/aiservices-dev-v2/static/public/ai_cover_gen/2024_04_04_08_59_47_532_Beautiful_Love (1).mp3 does not exist.
+[2024-04-04 08:59:47,570: INFO/MainProcess] Task ai_celery.ai_cover_gen[10d308cb-8f57-4c6e-83c2-a364f88ff205] succeeded in 0.029213280000476516s: None

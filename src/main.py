@@ -1,3 +1,4 @@
+import re
 import argparse
 import gc
 import hashlib
@@ -285,6 +286,8 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
         pitch_change = pitch_change * 12 + pitch_change_all
         ai_vocals_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]}_{voice_model}_p{pitch_change}_i{index_rate}_fr{filter_radius}_rms{rms_mix_rate}_pro{protect}_{f0_method}{"" if f0_method != "mangio-crepe" else f"_{crepe_hop_length}"}.wav')
         ai_cover_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]} ({voice_model} Ver).{output_format}')
+        base_path, file_name = ai_cover_path.rsplit('/', 1)
+        ai_cover_path = base_path + "/" + re.sub('[^a-zA-Z0-9\.]', '_', file_name)
 
         if not os.path.exists(ai_vocals_path):
             display_progress('[~] Converting voice using RVC...', 0.5, is_webui, progress)
@@ -310,7 +313,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
                 if file and os.path.exists(file):
                     os.remove(file)
 
-        return ai_cover_path
+        return instrumentals_path, ai_vocals_path, ai_cover_path
 
     except Exception as e:
         raise_exception(str(e), is_webui)
