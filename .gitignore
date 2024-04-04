@@ -11,6 +11,7 @@ rvc_models/rmvpe.pt
 # Output
 song_output/*/*.wav
 song_output/*/*.mp3
+*/*.mp3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
