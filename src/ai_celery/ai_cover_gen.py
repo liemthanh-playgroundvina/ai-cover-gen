@@ -58,8 +58,8 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         if youtube_link != "":
             url_file = ai_cover_gen(youtube_link, artist_name, pitch_voice, pitch_all)
         else:
-            audio_file = file.get('filename')
-            audio_file = "/home/ai/aiservices-dev-v2/" + audio_file
+            audio_file = file.get('filename').split("/")[-1]
+            audio_file = "/app/static/public/ai_cover_gen/" + audio_file
             url_file = ai_cover_gen(audio_file, artist_name, pitch_voice, pitch_all)
 
         # Successful
