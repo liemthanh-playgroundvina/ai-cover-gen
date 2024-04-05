@@ -19,13 +19,14 @@ start:
 stop:
 	docker compose -f docker-compose.yml down
 
+# Checker
+cmd-image:
+	docker run -it --gpus all --rm ai-cover-gen /bin/bash
 
-#cmd-image:
-#	docker run -it --gpus all --rm ai-cover-gen /bin/bash
-#
-#cmd-app:
-#	docker compose exec app /bin/bash
-#
+cmd-worker:
+	docker compose exec worker-ai-cover-gen /bin/bash
+
+
 # check:
 # 	import torch
 # 	print(torch.__version__)
