@@ -16,8 +16,16 @@ start:
 	docker compose -f docker-compose.yml down
 	docker compose -f docker-compose.yml up -d
 
+start-prod:
+	docker compose -f docker-compose-prod.yml down
+	docker compose -f docker-compose-prod.yml up -d
+
 stop:
 	docker compose -f docker-compose.yml down
+
+stop-prod:
+	docker compose -f docker-compose-prod.yml down
+
 
 # Checker
 cmd-image:

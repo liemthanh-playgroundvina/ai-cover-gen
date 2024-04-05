@@ -1,0 +1,34 @@
+version: '3.7'
+
+services:
+  worker-ai-cover-gen:
+    image: ai-cover-gen
+    container_name: worker-ai-cover-gen
+    volumes:
+      - ./src:/app/src
+      - ./mdxnet_models:/app/mdxnet_models
+      - ./rvc_models:/app/rvc_models
+      - ./song_output:/app/song_output
+      - app-public-volume-v2:/app/static/public
+    command: bash -c "celery -A ai_celery.router worker -Q ai_cover_gen --loglevel=info --pool=gevent --concurrency=1 -E --logfile=logs/celery.log --hostname=celery@ai_cover_gen && tail -f /dev/null" &
+#    restart: always
+    networks:
+      - aiservice-net-v2
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+      # limits:
+      #   cpus: '0.50'
+      #   memory: 2G
+
+volumes:
+  "app-public-volume-v2":
+    external: true
+
+networks:
+  aiservice-net-v2:
+    external: true
