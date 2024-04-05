@@ -1,4 +1,4 @@
-# AI-COVER Using RVC V2
+# AI COVER GEN Using RVC V2
 - Link: https://github.com/SociallyIneptWeeb/AICoverGen
 
 - Queue System using celery(python) + redis + rabbitMQ
@@ -6,7 +6,7 @@
 
 1. Clone & download model
 ```# command
-git clone https://github.com/liemthanh-playgroundvina/ai-cover
+git clone https://github.com/liemthanh-playgroundvina/ai-cover-gen
 cd ai-cover
 make download_model
 ```
