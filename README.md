@@ -11,6 +11,12 @@ cd ai-cover
 make download_model
 ```
 
+2. Config
+```# command
+make config
+# And add your parameters
+```
+
 2. Build Image
 ```# command
 make build
