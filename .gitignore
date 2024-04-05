@@ -1,3 +1,5 @@
+src/*core*
+
 # MDX Models
 mdxnet_models/*.onnx
 
