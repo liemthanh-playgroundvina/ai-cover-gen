@@ -8,6 +8,7 @@ import shlex
 import subprocess
 from contextlib import suppress
 from urllib.parse import urlparse, parse_qs
+from moviepy.editor import AudioFileClip
 
 import gradio as gr
 import librosa
@@ -170,6 +171,13 @@ def preprocess_song(song_input, mdx_model_params, song_id, is_webui, input_type,
         display_progress('[~] Downloading song...', 0, is_webui, progress)
         song_link = song_input.split('&')[0]
         orig_song_path = yt_download(song_link)
+# Limit 5 minutes audio
+        with AudioFileClip(orig_song_path) as audio_clip:
+            cut_audio = audio_clip.subclip(0, 5*60)
+            cut_audio_path = orig_song_path.replace('.mp3', '_trimmed.mp3')
+            cut_audio.write_audiofile(cut_audio_path)
+        orig_song_path = cut_audio_path
+
     elif input_type == 'local':
         orig_song_path = song_input
         keep_orig = True
