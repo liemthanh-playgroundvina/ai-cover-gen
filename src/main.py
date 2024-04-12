@@ -10,6 +10,7 @@ import subprocess
 from contextlib import suppress
 from urllib.parse import urlparse, parse_qs
 from moviepy.editor import AudioFileClip
+from datetime import datetime
 
 import gradio as gr
 import librosa
@@ -59,14 +60,22 @@ def get_youtube_video_id(url, ignore_playlist=True):
         if query.path[:3] == '/v/':
             return query.path.split('/')[2]
 
+    # Shorts
+    if "/shorts/" in url:
+        return url.split('/')[-1]
+
     # returns None for invalid YouTube url
     return None
 
 
 def yt_download(link):
+    now = datetime.now()
+    formatted_time = now.strftime(f"%Y_%m_%d_%H_%M_%S_{now.microsecond / 1000:.4f}")
+    path_audio = os.path.join("..", "static/public/ai_cover_gen", formatted_time.replace('.', '_'))
+
     ydl_opts = {
         'format': 'bestaudio',
-        'outtmpl': '%(title)s',
+        'outtmpl': f'{path_audio}',
         'nocheckcertificate': True,
         'ignoreerrors': True,
         'no_warnings': True,
@@ -76,9 +85,9 @@ def yt_download(link):
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         result = ydl.extract_info(link, download=True)
-        download_path = ydl.prepare_filename(result, outtmpl='%(title)s.mp3')
+        download_path = ydl.prepare_filename(result)
 
-    return download_path
+    return download_path + ".mp3"
 
 
 def raise_exception(error_msg, is_webui):
@@ -296,16 +305,8 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
 
         pitch_change = pitch_change * 12 + pitch_change_all
         # ai_vocals_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]}_{voice_model}_p{pitch_change}_i{index_rate}_fr{filter_radius}_rms{rms_mix_rate}_pro{protect}_{f0_method}{"" if f0_method != "mangio-crepe" else f"_{crepe_hop_length}"}.wav')
-        # ai_cover_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]} ({voice_model} Ver).{output_format}')
-        # base_path, file_name = ai_cover_path.rsplit('/', 1)
-        # ai_cover_path = base_path + "/" + re.sub('[^a-zA-Z0-9\.]', '_', file_name)
-
-        now = datetime.now()
-        formatted_time = now.strftime(f"%Y_%m_%d_%H_%M_%S_{now.microsecond / 1000:.4f}")
-        formatted_time = formatted_time.replace('.', '_')
-
-        ai_vocals_path = os.path.join(song_dir, f"{formatted_time}_vocals.wav")
-        ai_cover_path = os.path.join(song_dir, f"{formatted_time}_cover.wav")
+        ai_vocals_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]}_Vocals.wav')
+        ai_cover_path = os.path.join(song_dir, f'{os.path.splitext(os.path.basename(orig_song_path))[0]}_Cover.{output_format}')
 
         if not os.path.exists(ai_vocals_path):
             display_progress('[~] Converting voice using RVC...', 0.5, is_webui, progress)
