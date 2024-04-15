@@ -1,4 +1,5 @@
 import json
+import logging
 
 from celery import Task
 from ai_celery.celery_app import app
@@ -40,7 +41,7 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
             "artist_name": "Naruto"
         }
     """
-    print("============= AI Cover Gen task: Started ===================")
+    print(f"============= AI Cover Gen task {task_id}: Started ===================")
     try:
         # Load data
         data = json.loads(data)
@@ -73,8 +74,13 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         Celery_RedisClient.success(task_id, data, response)
         return
 
+    except ValueError as e:
+        err = {'code': "400", 'message': str(e)}
+        Celery_RedisClient.failed(task_id, data, err)
+        return
+
     except Exception as e:
-        print(str(e))
+        logging.getLogger().error(str(e), exc_info=True)
         err = {'code': "500", 'message': "Internal Server Error"}
         Celery_RedisClient.failed(task_id, data, err)
         return

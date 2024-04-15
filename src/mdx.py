@@ -277,7 +277,16 @@ def run_mdx(model_params, output_dir, model_path, filename, exclude_main=False, 
         diff_stem_name = stem_naming.get(stem_name) if invert_suffix is None else invert_suffix
         stem_name = f"{stem_name}_diff" if diff_stem_name is None else diff_stem_name
         invert_filepath = os.path.join(output_dir, f"{os.path.basename(os.path.splitext(filename)[0])}_{stem_name}.wav")
-        sf.write(invert_filepath, (-wave_processed.T * model.compensation) + wave.T, sr)
+
+        pad_length = wave.T.shape[0] - wave_processed.T.shape[0]
+        padded_wave_processed_T = np.pad(wave_processed.T, ((0, pad_length), (0, 0)), 'constant')
+        result = (-padded_wave_processed_T * model.compensation) + wave.T
+        sf.write(invert_filepath, result, sr)
+        print("Shape of wave_processed.T:", wave_processed.T.shape)
+        print("model.compensation:", model.compensation)
+        print("Shape of wave.T:", wave.T.shape)
+
+        # sf.write(invert_filepath, (-wave_processed.T * model.compensation) + wave.T, sr)
 
     if not keep_orig:
         os.remove(filename)
