@@ -83,10 +83,12 @@ def yt_download(link):
         'extractaudio': True,
         'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3'}],
     }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        result = ydl.extract_info(link, download=True)
-        download_path = ydl.prepare_filename(result)
-
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            result = ydl.extract_info(link, download=True)
+            download_path = ydl.prepare_filename(result)
+    except:
+        raise ValueError(f"Youtube link '{link}' don't existed")
     return download_path + ".mp3"
 
 
@@ -273,8 +275,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
             input_type = 'yt'
             song_id = get_youtube_video_id(song_input)
             if song_id is None:
-                error_msg = 'Invalid YouTube url.'
-                raise_exception(error_msg, is_webui)
+                raise ValueError(f"Youtube link '{song_input}' don't existed")
 
         # local audio file
         else:
@@ -333,6 +334,9 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
                     os.remove(file)
 
         return instrumentals_path, ai_vocals_path, ai_cover_path
+
+    except ValueError as e:
+        raise ValueError(e)
 
     except Exception as e:
         raise_exception(str(e), is_webui)
