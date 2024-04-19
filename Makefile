@@ -2,6 +2,7 @@ download_model:
 	python ./src/download_models.py
 	curl -o ./rvc_models/ai_cover_rvc_models.zip https://aiservices-bucket.s3.ap-southeast-1.amazonaws.com/ai_model/ai-cover/ai_cover_rvc_models.zip
 	unzip ./rvc_models/ai_cover_rvc_models.zip -d ./rvc_models
+	rm -rf ./rvc_models/ai_cover_rvc_models.zip
 
 config:
 	cp src/configs/env.example src/configs/.env

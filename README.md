@@ -7,7 +7,7 @@
 1. Clone & download model
 ```# command
 git clone https://github.com/liemthanh-playgroundvina/ai-cover-gen
-cd ai-cover
+cd ai-cover-gen
 make download_model
 ```
 
