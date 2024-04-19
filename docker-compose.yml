@@ -33,8 +33,8 @@ services:
       - ./rvc_models:/app/rvc_models
       - app-public-volume-v2:/app/static/public/ai_cover_gen
     command: ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8998"]
-    ports:
-      - "8998:8998"
+#    ports:
+#      - "8998:8998"
     restart: always
     networks:
       - aiservice-net-dev-v2

@@ -55,10 +55,13 @@ async def insert_model_pretrained(request: ModelData):
     try:
         with open('../rvc_models/models.json', 'r') as file:
             models = json.load(file)
+        models = [item for sublist in models for item in (sublist if isinstance(sublist, list) else [sublist])]
         # Insert model following voice_id
-        new_model = {"name": request.voice_id, "path": request.voice_id, "url": {"model": request.s3_model_url, "index": request.s3_index_url}},
+        new_model = {"name": request.voice_id, "path": request.voice_id, "url": {"model": request.s3_model_url, "index": request.s3_index_url}}
+        print(models)
+        print(new_model)
         models.append(new_model)
-
+        print(models)
         # Download model to dir /rvc_models
         voice_path = f"../rvc_models/{request.voice_id}"
         if os.path.exists(voice_path):
