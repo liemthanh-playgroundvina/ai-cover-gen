@@ -31,6 +31,9 @@ stop-prod:
 cmd-image:
 	docker run -it --gpus all --rm ai-cover-gen /bin/bash
 
+cmd-app:
+	docker compose exec app-ai-cover-gen /bin/bash
+
 cmd-worker:
 	docker compose exec worker-ai-cover-gen /bin/bash
 

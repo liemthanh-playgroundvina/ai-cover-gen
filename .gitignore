@@ -4,6 +4,7 @@ src/*core*
 mdxnet_models/*.onnx
 
 # RVC Models
+rvc_models/models.json
 rvc_models/*/*
 rvc_models/*/*.pth
 rvc_models/*/*.index
