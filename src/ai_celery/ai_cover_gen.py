@@ -1,5 +1,9 @@
-import json
 import logging
+import json
+import shutil
+import requests
+from urllib.parse import urlparse, unquote
+import os
 
 from celery import Task
 from ai_celery.celery_app import app
@@ -55,6 +59,9 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         pitch_voice = request.get('pitch_voice', 0)
         pitch_all = request.get('pitch_all', 0)
 
+        # Check artist name
+        check_artist_name(artist_name)
+
         # Predict
         if youtube_link != "":
             url_file = ai_cover_gen(youtube_link, artist_name, pitch_voice, pitch_all)
@@ -85,6 +92,53 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         err = {'code': "500", 'message': "Internal Server Error"}
         Celery_RedisClient.failed(task_id, data, err)
         return
+
+
+def check_artist_name(artist_name):
+    with open('../rvc_models/models.json', 'r') as file:
+        models = json.load(file)
+    # Find model in json
+    voice_model = None
+    for model in models:
+        if model['name'] == artist_name:
+            voice_model = model
+            break
+
+    # Find dir model
+    voice_dir_model = None
+    dir_models = os.listdir("../rvc_models")
+    for dir in dir_models:
+        if dir == artist_name:
+            voice_dir_model = dir
+            break
+
+    if voice_model is not None and voice_dir_model is not None:
+        return
+    elif voice_model is not None and voice_dir_model is None:
+        # Download model to dir /rvc_models
+        voice_path = f"../rvc_models/{voice_model['name']}"
+        if os.path.exists(voice_path):
+            shutil.rmtree(voice_path)
+        os.makedirs(voice_path)
+        write_file_from_s3(voice_model['url']['model'], voice_path)
+        write_file_from_s3(voice_model['url']['index'], voice_path)
+    else:
+        raise ValueError(f"Could not find artist_name '{artist_name}' model")
+
+
+def write_file_from_s3(url, destination_path: str = "../rvc_models/default_voice"):
+    response = requests.get(url)
+
+    parsed_url = urlparse(url)
+    filename = unquote(parsed_url.path.split('/')[-1])
+    file_path = os.path.join(destination_path, filename)
+    print(file_path)
+    if response.status_code == 200:
+        with open(file_path, "wb") as f:
+            f.write(response.content)
+        print("Download completed successfully.")
+    else:
+        raise Exception(f"Can't download file '{url}' from s3")
 
 
 def ai_cover_gen(audio_file: str, artist_name: str, pitch_change_voice: int, pitch_change_all: int):
