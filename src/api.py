@@ -1,3 +1,4 @@
+import logging
 import json
 import shutil
 import requests
@@ -11,6 +12,9 @@ from pydantic import BaseModel, validator
 
 from main import preprocess_song
 from main import mdxnet_models_dir, urlparse, get_youtube_video_id, get_hash, raise_exception, get_audio_paths
+
+logging.config.fileConfig("logging.ini",
+                          disable_existing_loggers=False)
 
 app = FastAPI()
 
@@ -40,6 +44,7 @@ async def get_model_pretrained(voice_id: str):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        logging.getLogger('app').error(str(e), exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 class ModelData(BaseModel):
@@ -82,6 +87,7 @@ async def insert_model_pretrained(request: ModelData):
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
+        logging.getLogger('app').error(str(e), exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -93,9 +99,11 @@ async def separate_audio(files: list, youtube_link: list):
     Note: Volume mapped: /static/public/ai_cover_gen
     """
     try:
+        print(files, youtube_link)
         # youtube_link to audio
         audios = []
         for link in youtube_link:
+
             audio_separated = process_audio(link)
             audios.append(audio_separated)
         for file in files:
@@ -114,7 +122,7 @@ async def separate_audio(files: list, youtube_link: list):
         raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
         free_gpu()
-        print(e)
+        logging.getLogger('app').error(str(e), exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 

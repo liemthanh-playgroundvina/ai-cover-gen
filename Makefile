@@ -1,11 +1,16 @@
 download_model:
 	curl -o ./rvc_models/ai_cover_rvc_models.zip https://aiservices-bucket.s3.ap-southeast-1.amazonaws.com/ai_model/ai-cover/ai_cover_rvc_models.zip
-	unzip ./rvc_models/ai_cover_rvc_models.zip -d ./rvc_models
+	unzip -o ./rvc_models/ai_cover_rvc_models.zip -d ./rvc_models
 	mv ./rvc_models/UVR-MDX-NET-Voc_FT.onnx ./rvc_models/UVR_MDXNET_KARA_2.onnx ./rvc_models/Reverb_HQ_By_FoxJoy.onnx ./mdxnet_models
 	rm -rf ./rvc_models/ai_cover_rvc_models.zip
 
+	curl -o ./rvc_models/ai_cover_rvc_models_2.zip https://aiservices-bucket.s3.ap-southeast-1.amazonaws.com/ai_model/ai-cover/ai_cover_rvc_models_2.zip
+	unzip -o ./rvc_models/ai_cover_rvc_models_2.zip -d ./rvc_models
+	rm -rf ./rvc_models/ai_cover_rvc_models_2.zip
+
 config:
 	cp src/configs/env.example src/configs/.env
+	mkdir -p ./src/logs && touch ./src/logs/celery.log
 	# And add params ...
 
 # Docker
