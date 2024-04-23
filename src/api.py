@@ -99,7 +99,6 @@ async def separate_audio(files: list, youtube_link: list):
     Note: Volume mapped: /static/public/ai_cover_gen
     """
     try:
-        print(files, youtube_link)
         # youtube_link to audio
         audios = []
         for link in youtube_link:
