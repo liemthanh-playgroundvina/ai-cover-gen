@@ -9,6 +9,7 @@ from celery import Task
 from ai_celery.celery_app import app
 from configs.env import settings
 from ai_celery.common import Celery_RedisClient, CommonCeleryService
+from celery.exceptions import SoftTimeLimitExceeded
 
 from main import song_cover_pipeline
 
@@ -29,6 +30,7 @@ class AICoverGenTask(Task):
 @app.task(
     bind=True,
     base=AICoverGenTask,
+    time_limit=300,
     name="{query}.{task_name}".format(
         query=settings.AI_QUERY_NAME,
         task_name=settings.AI_COVER_GEN
@@ -86,7 +88,12 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         err = {'code': "400", 'message': str(e)}
         Celery_RedisClient.failed(task_id, data, err)
         return
-
+    except SoftTimeLimitExceeded:
+        e = "Task was terminated after exceeding the time limit."
+        logging.getLogger().error(str(e), exc_info=True)
+        err = {'code': "500", 'message': "Internal Server Error"}
+        Celery_RedisClient.failed(task_id, data, err)
+        return
     except Exception as e:
         logging.getLogger().error(str(e), exc_info=True)
         err = {'code': "500", 'message': "Internal Server Error"}
