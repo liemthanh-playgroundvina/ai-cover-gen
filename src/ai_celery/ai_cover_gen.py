@@ -55,6 +55,9 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         file = json.loads(file)
         Celery_RedisClient.started(task_id, data)
 
+        # Check task removed
+        Celery_RedisClient.check_task_removed(task_id)
+
         # Request
         youtube_link = request.get('youtube_link')
         artist_name = request.get('artist_name')
