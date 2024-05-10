@@ -55,14 +55,14 @@ class CommonCeleryService(object):
         with open(file_path, "rb") as file:
             file_to_upload = S3UploadFileObject(filename=os.path.basename(file_path), file=file, mimetype=content_type)
             uploaded = upload_file(file_to_upload, folder_in_s3)
-            if uploaded['success']:
-                return {'url': uploaded['data']['url'],
-                        'meta_data': {
-                            'filename': os.path.basename(file_path),
-                            'storage': 's3'
-                        }}
-            else:
-                raise Exception(f"Failed to upload s3 file:\n {uploaded}")
+        if uploaded['success']:
+            return {'url': uploaded['data']['url'],
+                    'meta_data': {
+                        'filename': os.path.basename(file_path),
+                        'storage': 's3'
+                    }}
+        else:
+            raise Exception(f"Failed to upload s3 file:\n {uploaded}")
 
 
 class S3UploadFileObject(object):

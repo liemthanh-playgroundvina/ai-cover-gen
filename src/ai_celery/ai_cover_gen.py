@@ -10,6 +10,7 @@ from ai_celery.celery_app import app
 from configs.env import settings
 from ai_celery.common import Celery_RedisClient, CommonCeleryService
 from celery.exceptions import SoftTimeLimitExceeded
+from amqp.exceptions import PreconditionFailed
 
 from main import song_cover_pipeline
 
@@ -97,6 +98,12 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         err = {'code': "500", 'message': "Internal Server Error"}
         Celery_RedisClient.failed(task_id, data, err)
         return
+    except PreconditionFailed:
+        e = "Time out to connect into broker."
+        logging.getLogger().error(str(e), exc_info=True)
+        err = {'code': "500", 'message': "Internal Server Error"}
+        Celery_RedisClient.failed(task_id, data, err)
+        return
     except Exception as e:
         logging.getLogger().error(str(e), exc_info=True)
         err = {'code': "500", 'message': "Internal Server Error"}
@@ -142,7 +149,6 @@ def write_file_from_s3(url, destination_path: str = "../rvc_models/default_voice
     parsed_url = urlparse(url)
     filename = unquote(parsed_url.path.split('/')[-1])
     file_path = os.path.join(destination_path, filename)
-    print(file_path)
     if response.status_code == 200:
         with open(file_path, "wb") as f:
             f.write(response.content)
@@ -157,22 +163,23 @@ def ai_cover_gen(audio_file: str, artist_name: str, pitch_change_voice: int, pit
         artist_name,
         pitch_change=pitch_change_voice,
         pitch_change_all=pitch_change_all,
-        keep_files=True
+        keep_files=False,
+        output_format='wav',
     )
     # Save s3
-    url_instrumentals = CommonCeleryService.upload_s3_file(
-        instrumentals_path,
-        "audio/wav",
-        settings.AI_COVER_GEN
-    )
     ai_vocals_url = CommonCeleryService.upload_s3_file(
         ai_vocals_path,
         "audio/wav",
         settings.AI_COVER_GEN
     )
+    url_instrumentals = CommonCeleryService.upload_s3_file(
+        instrumentals_path,
+        "audio/wav",
+        settings.AI_COVER_GEN
+    )
     ai_cover_url = CommonCeleryService.upload_s3_file(
         ai_cover_path,
-        "audio/mpeg",
+        "audio/wav",
         settings.AI_COVER_GEN
     )
     return {

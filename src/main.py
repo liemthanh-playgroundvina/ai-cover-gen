@@ -31,6 +31,8 @@ mdxnet_models_dir = os.path.join(BASE_DIR, 'mdxnet_models')
 rvc_models_dir = os.path.join(BASE_DIR, 'rvc_models')
 output_dir = os.path.join(BASE_DIR, 'song_output')
 
+MAX_DURATION_YOUTUBE = 10*60
+
 
 def get_youtube_video_id(url, ignore_playlist=True):
     """
@@ -183,11 +185,10 @@ def preprocess_song(song_input, mdx_model_params, song_id, is_webui, input_type,
         display_progress('[~] Downloading song...', 0, is_webui, progress)
         song_link = song_input.split('&')[0]
         orig_song_path = yt_download(song_link)
-# Limit 5 minutes audio
-        max_duration = 5*60
+# Limit MAX_DURATION_YOUTUBE
         with AudioFileClip(orig_song_path) as audio_clip:
-            if audio_clip.duration > max_duration:
-                cut_audio = audio_clip.subclip(0, max_duration)
+            if audio_clip.duration > MAX_DURATION_YOUTUBE:
+                cut_audio = audio_clip.subclip(0, MAX_DURATION_YOUTUBE)
                 cut_audio_path = orig_song_path.replace('.mp3', '_trimmed.mp3')
                 cut_audio.write_audiofile(cut_audio_path)
                 orig_song_path = cut_audio_path
