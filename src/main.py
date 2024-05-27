@@ -274,7 +274,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
         # if youtube url
         if urlparse(song_input).scheme == 'https':
             input_type = 'yt'
-            song_id = get_youtube_video_id(song_input)
+            song_id = get_youtube_video_id(song_input) + "_" + voice_model.replace(" ", "_")
             if song_id is None:
                 raise ValueError(f"Youtube link '{song_input}' don't existed")
 
@@ -283,7 +283,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
             input_type = 'local'
             song_input = song_input.strip('\"')
             if os.path.exists(song_input):
-                song_id = get_hash(song_input)
+                song_id = get_hash(song_input) + "_" + voice_model.replace(" ", "_")
             else:
                 error_msg = f'{song_input} does not exist.'
                 song_id = None
