@@ -163,7 +163,7 @@ def ai_cover_gen(audio_file: str, artist_name: str, pitch_change_voice: int, pit
         artist_name,
         pitch_change=pitch_change_voice,
         pitch_change_all=pitch_change_all,
-        keep_files=False,
+        keep_files=True,
         output_format='wav',
     )
     # Save s3
