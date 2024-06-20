@@ -85,12 +85,12 @@ def yt_download(link):
         'extractaudio': True,
         'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3'}],
     }
-    try:
-        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-            result = ydl.extract_info(link, download=True)
-            download_path = ydl.prepare_filename(result)
-    except:
-        raise ValueError(f"Youtube link '{link}' don't existed")
+    # try:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        result = ydl.extract_info(link, download=True)
+        download_path = ydl.prepare_filename(result)
+    # except:
+    #     raise ValueError(f"Youtube link '{link}' don't existed")
     return download_path + ".mp3"
 
 
