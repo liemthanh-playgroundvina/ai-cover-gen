@@ -84,6 +84,7 @@ def yt_download(link):
         'quiet': True,
         'extractaudio': True,
         'postprocessors': [{'key': 'FFmpegExtractAudio', 'preferredcodec': 'mp3'}],
+        'youtube': [{'player_skip': 'webpage'}],
     }
     # try:
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
