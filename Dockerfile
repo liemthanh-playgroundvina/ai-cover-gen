@@ -10,6 +10,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN python -m pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install -U --pre "yt-dlp[default]"
 RUN apt-get clean autoclean && apt-get autoremove --yes && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # CUDA Home
