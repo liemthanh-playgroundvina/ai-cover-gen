@@ -335,6 +335,7 @@ def song_cover_pipeline(song_input, voice_model, pitch_change, keep_files,
                 if file and os.path.exists(file):
                     os.remove(file)
 
+        display_progress('[~] Successful generate instruct, vocal, cover', 0.95, is_webui, progress)
         return instrumentals_path, ai_vocals_path, ai_cover_path
 
     except ValueError as e:
