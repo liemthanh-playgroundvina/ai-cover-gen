@@ -166,22 +166,26 @@ def ai_cover_gen(audio_file: str, artist_name: str, pitch_change_voice: int, pit
         keep_files=True,
         output_format='wav',
     )
+    print(ai_vocals_path)
     # Save s3
     ai_vocals_url = CommonCeleryService.upload_s3_file(
         ai_vocals_path,
         "audio/wav",
         settings.AI_COVER_GEN
     )
+    print(instrumentals_path)
     url_instrumentals = CommonCeleryService.upload_s3_file(
         instrumentals_path,
         "audio/wav",
         settings.AI_COVER_GEN
     )
+    print(ai_cover_path)
     ai_cover_url = CommonCeleryService.upload_s3_file(
         ai_cover_path,
         "audio/wav",
         settings.AI_COVER_GEN
     )
+    print("Done")
     return {
         "instrumental": url_instrumentals,
         "ai_vocal": ai_vocals_url,
