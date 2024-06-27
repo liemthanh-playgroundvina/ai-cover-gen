@@ -65,6 +65,15 @@ class CommonCeleryService(object):
             raise Exception(f"Failed to upload s3 file:\n {uploaded}")
 
 
+    @staticmethod
+    def fast_upload_s3_files(files_path: list, folder_in_s3: str):
+        from ai_celery.upload_s3 import fast_upload_files
+
+        urls = fast_upload_files(files_path, folder_in_s3)
+
+        return urls
+
+
 class S3UploadFileObject(object):
     filename = None
     file = None

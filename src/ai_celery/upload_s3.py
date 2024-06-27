@@ -56,6 +56,31 @@ def upload_file(file, folder):
             }
         }
 
+def fast_upload_files(files, folder, workers=20):
+    import os
+    import boto3
+    import boto3.s3.transfer as s3transfer
+
+    s3client = getS3()
+    transfer_config = s3transfer.TransferConfig(
+        use_threads=True,
+        max_concurrency=workers,
+    )
+    s3t = s3transfer.create_transfer_manager(s3client, transfer_config)
+
+    res = []
+
+    for file in files:
+        dst = os.path.join(folder, os.path.basename(file))
+        s3t.upload(file, settings.AWS_BUCKET_NAME, dst)
+
+        url = f"https://{settings.AWS_BUCKET_NAME}.s3.amazonaws.com/{dst}"
+        res.append(url)
+
+    s3t.shutdown()
+
+    return res
+
 
 def delete_file(key, folder):
     """
@@ -80,7 +105,7 @@ def delete_file(key, folder):
         return False
 
 
-def getS3():
+def getS3(workers=20):
     """
     This function returns an S3 client object configured with AWS access keys and region settings from
     the provided settings file.
@@ -89,12 +114,16 @@ def getS3():
     `settings` module.
     """
     import boto3
+    import botocore
+
+    botocore_config = botocore.config.Config(max_pool_connections=workers)
 
     s3_client = boto3.client(
         "s3",
         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-        region_name=settings.AWS_REGION
+        region_name=settings.AWS_REGION,
+        config=botocore_config,
     )
     return s3_client
 
