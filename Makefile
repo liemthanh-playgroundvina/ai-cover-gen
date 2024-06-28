@@ -42,8 +42,11 @@ cmd-app:
 
 cmd-worker:
 	docker compose exec worker-ai-cover-gen /bin/bash
+
 log-worker:
 	cat src/logs/celery.log
+log-worker-stream:
+	tail -f -n 100 src/logs/celery.log
 
 # check:
 # 	import torch

@@ -9,7 +9,7 @@ from celery import Task
 from ai_celery.celery_app import app
 from configs.env import settings
 from ai_celery.common import Celery_RedisClient, CommonCeleryService
-from celery.exceptions import SoftTimeLimitExceeded
+from celery.exceptions import SoftTimeLimitExceeded, TimeLimitExceeded
 from amqp.exceptions import PreconditionFailed
 
 from main import song_cover_pipeline
@@ -31,7 +31,8 @@ class AICoverGenTask(Task):
 @app.task(
     bind=True,
     base=AICoverGenTask,
-    time_limit=300,
+    time_limit=10,
+    soft_time_limit=10,
     name="{query}.{task_name}".format(
         query=settings.AI_QUERY_NAME,
         task_name=settings.AI_COVER_GEN
@@ -92,10 +93,16 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         err = {'code': "400", 'message': str(e)}
         Celery_RedisClient.failed(task_id, data, err)
         return
-    except SoftTimeLimitExceeded:
-        e = "Task was terminated after exceeding the time limit."
+    except SoftTimeLimitExceeded as e:
         logging.getLogger().error(str(e), exc_info=True)
-        err = {'code': "500", 'message': "Internal Server Error"}
+        error = "Task was terminated after exceeding the time limit."
+        err = {'code': "500", 'message': error}
+        Celery_RedisClient.failed(task_id, data, err)
+        return
+    except TimeLimitExceeded as e:
+        logging.getLogger().error(str(e), exc_info=True)
+        error = "Task was terminated after exceeding the time limit."
+        err = {'code': "500", 'message': error}
         Celery_RedisClient.failed(task_id, data, err)
         return
     except PreconditionFailed:
