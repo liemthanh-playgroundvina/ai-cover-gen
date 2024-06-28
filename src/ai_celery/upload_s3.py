@@ -75,7 +75,12 @@ def fast_upload_files(files, folder, workers=20):
         s3t.upload(file, settings.AWS_BUCKET_NAME, dst)
 
         url = f"https://{settings.AWS_BUCKET_NAME}.s3.amazonaws.com/{dst}"
-        res.append(url)
+        response = {'url': url,
+         'meta_data': {
+             'filename': os.path.basename(file),
+             'storage': 's3'
+         }}
+        res.append(response)
 
     s3t.shutdown()
 
