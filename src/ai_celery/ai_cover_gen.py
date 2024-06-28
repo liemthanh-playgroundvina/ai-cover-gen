@@ -50,72 +50,72 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         }
     """
     print(f"============= AI Cover Gen task {task_id}: Started ===================")
-    try:
-        # Load data
-        data = json.loads(data)
-        request = json.loads(task_request)
-        file = json.loads(file)
-        Celery_RedisClient.started(task_id, data)
+    # try:
+    # Load data
+    data = json.loads(data)
+    request = json.loads(task_request)
+    file = json.loads(file)
+    Celery_RedisClient.started(task_id, data)
 
-        # Check task removed
-        Celery_RedisClient.check_task_removed(task_id)
+    # Check task removed
+    Celery_RedisClient.check_task_removed(task_id)
 
-        # Request
-        youtube_link = request.get('youtube_link')
-        artist_name = request.get('artist_name')
-        pitch_voice = request.get('pitch_voice', 0)
-        pitch_all = request.get('pitch_all', 0)
+    # Request
+    youtube_link = request.get('youtube_link')
+    artist_name = request.get('artist_name')
+    pitch_voice = request.get('pitch_voice', 0)
+    pitch_all = request.get('pitch_all', 0)
 
-        # Check artist name
-        check_artist_name(artist_name)
+    # Check artist name
+    check_artist_name(artist_name)
 
-        # Predict
-        if youtube_link != "":
-            url_file = ai_cover_gen(youtube_link, artist_name, pitch_voice, pitch_all)
-        else:
-            audio_file = file.get('filename').split("/")[-1]
-            audio_file = "/app/static/public/ai_cover_gen/" + audio_file
-            url_file = ai_cover_gen(audio_file, artist_name, pitch_voice, pitch_all)
+    # Predict
+    if youtube_link != "":
+        url_file = ai_cover_gen(youtube_link, artist_name, pitch_voice, pitch_all)
+    else:
+        audio_file = file.get('filename').split("/")[-1]
+        audio_file = "/app/static/public/ai_cover_gen/" + audio_file
+        url_file = ai_cover_gen(audio_file, artist_name, pitch_voice, pitch_all)
 
-        # Successful
-        metadata = {
-            "task": "ai_cover_gen",
-            "tool": "local",
-            "model": "rvc_v2",
-            "usage": None,
-        }
-        response = {"url_file": url_file, "metadata": metadata}
-        Celery_RedisClient.success(task_id, data, response)
-        return
+    # Successful
+    metadata = {
+        "task": "ai_cover_gen",
+        "tool": "local",
+        "model": "rvc_v2",
+        "usage": None,
+    }
+    response = {"url_file": url_file, "metadata": metadata}
+    Celery_RedisClient.success(task_id, data, response)
+    return
 
-    except ValueError as e:
-        logging.getLogger().error(str(e), exc_info=True)
-        err = {'code': "400", 'message': str(e)}
-        Celery_RedisClient.failed(task_id, data, err)
-        return
-    except SoftTimeLimitExceeded as e:
-        logging.getLogger().error("SoftTimeLimitExceeded: " + str(e), exc_info=True)
-        error = "Task was terminated after exceeding the time limit."
-        err = {'code': "500", 'message': error}
-        Celery_RedisClient.failed(task_id, data, err)
-        return
-    except TimeLimitExceeded as e:
-        logging.getLogger().error("TimeLimitExceeded: " + str(e), exc_info=True)
-        error = "Task was terminated after exceeding the time limit."
-        err = {'code': "500", 'message': error}
-        Celery_RedisClient.failed(task_id, data, err)
-        return
-    except PreconditionFailed:
-        e = "Time out to connect into broker."
-        logging.getLogger().error(str(e), exc_info=True)
-        err = {'code': "500", 'message': "Internal Server Error"}
-        Celery_RedisClient.failed(task_id, data, err)
-        return
-    except Exception as e:
-        logging.getLogger().error(str(e), exc_info=True)
-        err = {'code': "500", 'message': "Internal Server Error"}
-        Celery_RedisClient.failed(task_id, data, err)
-        return
+    # except ValueError as e:
+    #     logging.getLogger().error(str(e), exc_info=True)
+    #     err = {'code': "400", 'message': str(e)}
+    #     Celery_RedisClient.failed(task_id, data, err)
+    #     return
+    # except SoftTimeLimitExceeded as e:
+    #     logging.getLogger().error("SoftTimeLimitExceeded: " + str(e), exc_info=True)
+    #     error = "Task was terminated after exceeding the time limit."
+    #     err = {'code': "500", 'message': error}
+    #     Celery_RedisClient.failed(task_id, data, err)
+    #     return
+    # except TimeLimitExceeded as e:
+    #     logging.getLogger().error("TimeLimitExceeded: " + str(e), exc_info=True)
+    #     error = "Task was terminated after exceeding the time limit."
+    #     err = {'code': "500", 'message': error}
+    #     Celery_RedisClient.failed(task_id, data, err)
+    #     return
+    # except PreconditionFailed:
+    #     e = "Time out to connect into broker."
+    #     logging.getLogger().error(str(e), exc_info=True)
+    #     err = {'code': "500", 'message': "Internal Server Error"}
+    #     Celery_RedisClient.failed(task_id, data, err)
+    #     return
+    # except Exception as e:
+    #     logging.getLogger().error(str(e), exc_info=True)
+    #     err = {'code': "500", 'message': "Internal Server Error"}
+    #     Celery_RedisClient.failed(task_id, data, err)
+    #     return
 
 
 def check_artist_name(artist_name):
