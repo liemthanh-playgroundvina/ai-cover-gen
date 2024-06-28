@@ -31,8 +31,8 @@ class AICoverGenTask(Task):
 @app.task(
     bind=True,
     base=AICoverGenTask,
-    time_limit=10,
     soft_time_limit=10,
+    time_limit=15,
     name="{query}.{task_name}".format(
         query=settings.AI_QUERY_NAME,
         task_name=settings.AI_COVER_GEN
