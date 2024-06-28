@@ -94,13 +94,13 @@ def ai_cover_gen_task(self, task_id: str, data: bytes, task_request: bytes, file
         Celery_RedisClient.failed(task_id, data, err)
         return
     except SoftTimeLimitExceeded as e:
-        logging.getLogger().error(str(e), exc_info=True)
+        logging.getLogger().error(str("SoftTimeLimitExceeded: " +e ), exc_info=True)
         error = "Task was terminated after exceeding the time limit."
         err = {'code': "500", 'message': error}
         Celery_RedisClient.failed(task_id, data, err)
         return
     except TimeLimitExceeded as e:
-        logging.getLogger().error(str(e), exc_info=True)
+        logging.getLogger().error(str("TimeLimitExceeded" + e), exc_info=True)
         error = "Task was terminated after exceeding the time limit."
         err = {'code': "500", 'message': error}
         Celery_RedisClient.failed(task_id, data, err)
