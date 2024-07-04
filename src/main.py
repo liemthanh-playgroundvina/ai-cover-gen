@@ -11,6 +11,7 @@ from contextlib import suppress
 from urllib.parse import urlparse, parse_qs
 from moviepy.editor import AudioFileClip
 from datetime import datetime
+from audio_separator.separator import Separator
 
 import gradio as gr
 import librosa
@@ -204,7 +205,18 @@ def preprocess_song(song_input, mdx_model_params, song_id, is_webui, input_type,
     orig_song_path = convert_to_stereo(orig_song_path)
 
     display_progress('[~] Separating Vocals from Instrumental...', 0.1, is_webui, progress)
-    vocals_path, instrumentals_path = run_mdx(mdx_model_params, song_output_dir, os.path.join(mdxnet_models_dir, 'UVR-MDX-NET-Voc_FT.onnx'), orig_song_path, denoise=True, keep_orig=keep_orig)
+    # vocals_path, instrumentals_path = run_mdx(mdx_model_params, song_output_dir, os.path.join(mdxnet_models_dir, 'Kim_Vocal_2.onnx'), orig_song_path, denoise=True, keep_orig=keep_orig)
+    separator = Separator(
+        model_file_dir="/app/mdxnet_models",
+        output_dir=song_output_dir,
+    )
+    separator.load_model(
+        model_filename="Kim_Vocal_2.onnx",
+    )
+    beat, raw_vocals = separator.separate(orig_song_path)
+    instrumentals_path = os.path.join(song_output_dir, beat)
+    vocals_path = os.path.join(song_output_dir, raw_vocals)
+    display_progress(f'[~] {instrumentals_path}, {vocals_path}', 0.2, is_webui, progress)
 
     display_progress('[~] Separating Main Vocals from Backup Vocals...', 0.2, is_webui, progress)
     backup_vocals_path, main_vocals_path = run_mdx(mdx_model_params, song_output_dir, os.path.join(mdxnet_models_dir, 'UVR_MDXNET_KARA_2.onnx'), vocals_path, suffix='Backup', invert_suffix='Main', denoise=True)
@@ -252,9 +264,10 @@ def add_audio_effects(audio_path, reverb_rm_size, reverb_wet, reverb_dry, reverb
 
 
 def combine_audio(audio_paths, output_path, main_gain, backup_gain, inst_gain, output_format):
+    """Change volume"""
     main_vocal_audio = AudioSegment.from_wav(audio_paths[0]) - 4 + main_gain
     backup_vocal_audio = AudioSegment.from_wav(audio_paths[1]) - 6 + backup_gain
-    instrumental_audio = AudioSegment.from_wav(audio_paths[2]) - 7 + inst_gain
+    instrumental_audio = AudioSegment.from_wav(audio_paths[2]) + inst_gain # - 2
     main_vocal_audio.overlay(backup_vocal_audio).overlay(instrumental_audio).export(output_path, format=output_format)
 
 

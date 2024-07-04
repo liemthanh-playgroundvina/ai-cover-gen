@@ -1,7 +1,7 @@
 import mimetypes
 from typing import Optional, Text, Tuple
 from datetime import datetime
-
+import time
 import os
 
 import requests
@@ -71,8 +71,13 @@ def fast_upload_files(files, folder, workers=20):
     res = []
 
     for file in files:
-        dst = os.path.join(folder, os.path.basename(file))
-        s3t.upload(file, settings.AWS_BUCKET_NAME, dst)
+        dst = os.path.join(folder, str(int(time.time() * 10**7)) + os.path.splitext(file)[1])
+        s3t.upload(
+            file,
+            settings.AWS_BUCKET_NAME,
+            dst,
+            extra_args={'ACL': "public-read", 'ContentType': f'{mimetypes.guess_type(file)[0]}; charset=utf-8'}
+        )
 
         url = f"https://{settings.AWS_BUCKET_NAME}.s3.amazonaws.com/{dst}"
         response = {'url': url,
